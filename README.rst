@@ -45,5 +45,6 @@ or on twitter @johanvts.
 
 To-Do
 -----
-Get the package into MELPA.
-Group up variables for easier customization.
+- Get the package into MELPA.
+- Group up variables for easier customization.
+- Better status bar
