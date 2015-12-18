@@ -32,7 +32,7 @@ Acknowledgment
 --------------
 
 A big thanks to Dan Torop for his `emacs animation guide
-http://dantorop.info/project/emacs-animation/` and Vasilij Schneidermann for the 'xbm-life https://github.com/wasamasa/xbm-life' package.
+<http://dantorop.info/project/emacs-animation/>`_ and Vasilij Schneidermann for the `xbm-life <https://github.com/wasamasa/xbm-life>`_ package.
 The code relies heavily on these two sources.
 
 Contribution
