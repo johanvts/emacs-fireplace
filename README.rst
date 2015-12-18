@@ -11,6 +11,7 @@ Installation
 
 Download the ''fireplace.el'' and ''fireplace.elc'' files and place them somewhere in your ''.emacs.d'' directory, say in ''.emacs.d/fireplace/''.
 Put ''(load "~./.emacs.d/fireplace/fireplace") in your init file ('.emacs').
+Note that there is a significant performance difference bewteen the compiled and non-compiled fireplace.
 
 You can start the fire using ''M-x fireplace''.
 The fireplace will try to fill the current window with a new buffer.
