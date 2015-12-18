@@ -48,4 +48,4 @@ To-Do
 - Get the package into MELPA.
 - Group up variables for easier customization.
 - Better status bar
-- Support using ''kill-buffer'' to turn of the fire.
+- Support using ''kill-buffer'' to turn the fire off.
