@@ -26,7 +26,7 @@ Key bind                  Function
 ``C-s``                   Toggle smoke
 ========================= ================================
 
-All varaibles starting with ''fireplace-'' can be customized. Use ''C-h v'' to  read thier documentation. 
+All variables starting with ''fireplace-'' can be customized. Use ''C-h v'' to  read thier documentation. 
 
 Acknowledgment
 --------------
