@@ -110,9 +110,10 @@
     (setq buffer-read-only t)))
 
 
-;;Commands
-
+;; Commands
+;;;###autoload
 (defun fireplace (arg)
+  "Turn on the fire like it's winter."
   (interactive "P")
   (with-current-buffer (get-buffer-create fireplace-buffer-name)
     (setq cursor-type nil)
@@ -151,18 +152,13 @@
       (setq fireplace-smoke-on nil)
     (setq fireplace-smoke-on t)))
 
-(provide 'fireplace)
-(provide 'fireplace-off)
-(provide 'fireplace-down)
-
 ;;Key-bindings
 
-(define-derived-mode fireplace-mode special-mode
-  "A cozy fireplace")
-
+(define-derived-mode fireplace-mode special-mode  "A cozy fireplace")
 
 (define-key fireplace-mode-map (kbd "C-+") 'fireplace-down)
 (define-key fireplace-mode-map (kbd "C--") 'fireplace-up)
 (define-key fireplace-mode-map (kbd "C-s") 'fireplace-toggle-smoke)
 
+(provide 'fireplace)
 ;;; fireplace.el ends here
