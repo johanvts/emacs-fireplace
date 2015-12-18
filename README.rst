@@ -9,7 +9,8 @@ A cozy fireplace for emacs.
 Installation
 ------------
 
-Download the ''fireplace.el'' and ''fireplace.elc'' files and place them somewhere in your ''.emacs.d'' directory, say in ''.emacs.d/fireplace/''.
+Download the ''fireplace.el'' place it somewhere in your ''.emacs.d'' directory, say in ''.emacs.d/fireplace/''.
+Compile the file using ''M-x byte-compile-file''.
 Put ''(load "~./.emacs.d/fireplace/fireplace") in your init file ('.emacs').
 Note that there is a significant performance difference bewteen the compiled and non-compiled fireplace.
 
