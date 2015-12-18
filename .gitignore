@@ -1,1 +1,7 @@
 *.elc
+/.cask
+/test/sandbox
+/features/sandbox
+/dist
+/build
+/tmp
