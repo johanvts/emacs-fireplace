@@ -1,31 +1,33 @@
-;;;fireplace.el --- A cozy fireplace for emacs
-
+;;; fireplace.el --- A cozy fireplace for emacs
+;;; Version: 1.0
+;;; Commentary:
 ;; Author: Johan Sivertsen <johanvts@gmail.com>
 ;; URL: https://github.com/johanvts/emacs-fireplace
 ;; Released: December 2015
 
-;;User definable Variables
+;;; Code:
+;; User definable Variables
 (defvar fireplace-smoke-on nil
-  "Controls if smoke is drawn of not")
+  "Controls if smoke is drawn of not.")
 
 (defvar fireplace-fury 0.85
   "The redraw speed of the fire. Between 0 and 1.")
- 
-(defvar fireplace-smoke-char ?\*  
+
+(defvar fireplace-smoke-char ?\*
   "Char used for drawing smoke.")
 
 (defvar fireplace-background-char ?\s
   "Char used for filling in the background.")
 
-(defvar fireplace-fill-char ?\s  
+(defvar fireplace-fill-char ?\s
   "Char used for drawing smoke.")
 
 (defvar fireplace-flame-pos '(0.5 0.2 0.8 0.36 0.64 )
-  "Relative position and order for drawing flames")
+  "Relative position and order for drawing flames.")
 
 
 (defvar fireplace-buffer-name  "*fireplace*"
-  "Default name for fireplace buffer")
+  "Default name for fireplace buffer.")
 
 ;; Program controlled variables
 
@@ -58,7 +60,7 @@
       (delete-char hot-core)
       (insert (propertize (make-string hot-core fireplace-fill-char)
 				      'face `(:background ,"orange red"))))))
-			  
+
 (defun smoke (x height)
   (gotoxy (if (>(random 3) 1)
 	      (+ x (random (/ fp-bkgd-width 5)))
@@ -67,7 +69,7 @@
   (delete-char 1)
   (insert (propertize (make-string 1 fireplace-smoke-char)
 		      'face `(:foreground, "slate grey"))))
-  
+
 (defun flame (middle h)
   (setq cursor-type nil)
   (let* ((width h)
@@ -106,7 +108,7 @@
 	      (round (* (+ 0.2 (min pos (- 1 pos))) flame-width))
 	      (random 3))))
     (setq buffer-read-only t)))
-  
+
 
 ;;Commands
 
@@ -116,7 +118,7 @@
     (setq cursor-type nil)
     (buffer-disable-undo)
     (switch-to-buffer fireplace-buffer-name)
-    (setq fp-bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))) 
+    (setq fp-bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name))))
     (setq fp-bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name))))
     (setq fp-flame-width (min fp-bkgd-height (round (/ fp-bkgd-width 2.5))))
     (make-grid)
@@ -124,10 +126,10 @@
     (setq fp-timer (run-with-timer 1 (- 1 fireplace-fury)
 					  'draw-fireplace fireplace-buffer-name fireplace-flame-pos fp-flame-width))))
 
-(defun fireplace-off () 
+(defun fireplace-off ()
   "Put out the fire."
   (interactive)
-  (when fp-timer 
+  (when fp-timer
     (cancel-timer fp-timer)
     (kill-buffer fireplace-buffer-name)))
 
@@ -148,17 +150,19 @@
   (if fireplace-smoke-on
       (setq fireplace-smoke-on nil)
     (setq fireplace-smoke-on t)))
-  
+
 (provide 'fireplace)
 (provide 'fireplace-off)
 (provide 'fireplace-down)
 
 ;;Key-bindings
 
-(define-derived-mode fireplace-mode special-mode 
-  "A cozy fireplace") 
+(define-derived-mode fireplace-mode special-mode
+  "A cozy fireplace")
 
 
-(define-key fireplace-mode-map (kbd "C-+") 'fireplace-down) 
+(define-key fireplace-mode-map (kbd "C-+") 'fireplace-down)
 (define-key fireplace-mode-map (kbd "C--") 'fireplace-up)
 (define-key fireplace-mode-map (kbd "C-s") 'fireplace-toggle-smoke)
+
+;;; fireplace.el ends here
