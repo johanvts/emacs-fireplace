@@ -29,7 +29,7 @@ Key bind                  Function
 ``q``                     Turn off fire
 ========================= ================================
 
-All variables starting with ''fireplace-'' can be customized. Use ''C-h v'' to  read their documentation.
+Use ``M-x customize-group RET fireplace RET`` to view and change the user defined variables and read their documentation.
 
 Acknowledgment
 --------------
@@ -49,6 +49,5 @@ or on twitter @johanvts.
 To-Do
 -----
 - Get the package into MELPA.
-- Group up variables for easier customization.
 - Better status bar
 - Support using ''kill-buffer'' to turn the fire off.
