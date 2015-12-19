@@ -51,26 +51,26 @@
 
 ;; Program controlled variables
 
-(defvar fp-bkgd-height "Used for fireplace height, will be set from windows size")
-(defvar fp-bkgd-width "Used for fireplace width, will be set from windows size")
-(defvar fp-timer "Holds the active fireplace, kill using fireplace-off")
-(defvar fp-flame-width "Calculated width of flames")
+(defvar fireplace--bkgd-height "Used for fireplace height, will be set from windows size")
+(defvar fireplace--bkgd-width "Used for fireplace width, will be set from windows size")
+(defvar fireplace--timer "Holds the active fireplace, kill using fireplace-off")
+(defvar fireplace--flame-width "Calculated width of flames")
 
 ;; Helper routines
 
 (defun fireplace--make-grid ()
   (erase-buffer)
-  (dotimes (i fp-bkgd-height)
-    (insert-char fireplace-background-char fp-bkgd-width)
+  (dotimes (i fireplace--bkgd-height)
+    (insert-char fireplace-background-char fireplace--bkgd-width)
     (newline)))
 
 (defun fireplace--gotoxy(x y)
-  (goto-char (+ 1 x (* (- fp-bkgd-height (+ 1 y)) (+ 1 fp-bkgd-width)))))
+  (goto-char (+ 1 x (* (- fireplace--bkgd-height (+ 1 y)) (+ 1 fireplace--bkgd-width)))))
 
 
 (defun draw-flame-stripe (x y width)
   (fireplace--gotoxy x y)
-  (let* ((actual-width (min width (1+ (- fp-bkgd-width x))))
+  (let* ((actual-width (min width (1+ (- fireplace--bkgd-width x))))
 	 (hot-core (/ actual-width 2)))
     (delete-char actual-width)
     (insert (propertize (make-string actual-width fireplace-fill-char)
@@ -83,9 +83,9 @@
 
 (defun fireplace--smoke (x height)
   (fireplace--gotoxy (if (>(random 3) 1)
-	      (+ x (random (/ fp-bkgd-width 5)))
-	    (max 0 (- x (random (/ fp-bkgd-width 5)))))
-	  (+ height (random (- fp-bkgd-height height))))
+        (+ x (random (/ fireplace--bkgd-width 5)))
+      (max 0 (- x (random (/ fireplace--bkgd-width 5)))))
+    (+ height (random (- fireplace--bkgd-height height))))
   (delete-char 1)
   (insert (propertize (make-string 1 fireplace-smoke-char)
 		      'face `(:foreground, "slate grey"))))
@@ -103,8 +103,8 @@
       (when (< x 0)
         (setq width (+ width x)
               x 0))
-      (when (> (+ x width) fp-bkgd-width)
-        (setq width (- fp-bkgd-width x)))
+      (when (> (+ x width) fireplace--bkgd-width)
+        (setq width (- fireplace--bkgd-width x)))
       (draw-flame-stripe x y width))
     (dotimes (y high)
       (setq line (+ lower y))
@@ -113,8 +113,8 @@
       (when (< x 0)
         (setq width (+ width x)
               x 0))
-      (when (> (+ x width) fp-bkgd-width)
-        (setq width (- fp-bkgd-width x)))
+      (when (> (+ x width) fireplace--bkgd-width)
+        (setq width (- fireplace--bkgd-width x)))
       (draw-flame-stripe x line width)
       (when fireplace-smoke-on (fireplace--smoke x h)))))
 
@@ -123,7 +123,7 @@
     (setq buffer-read-only nil)
     (fireplace--make-grid)
     (dolist (pos flame-pos)
-      (fireplace--flame (round (* pos fp-bkgd-width))
+      (fireplace--flame (round (* pos fireplace--bkgd-width))
 	     (+
 	      (round (* (+ 0.2 (min pos (- 1 pos))) flame-width))
 	      (random 3))))
@@ -139,31 +139,31 @@
     (setq cursor-type nil)
     (buffer-disable-undo)
     (switch-to-buffer fireplace-buffer-name)
-    (setq fp-bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))
-          fp-bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name)))
-          fp-flame-width (min fp-bkgd-height (round (/ fp-bkgd-width 2.5))))
+    (setq fireplace--bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))
+          fireplace--bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name)))
+          fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5))))
     (fireplace--make-grid)
     (fireplace-mode)
-    (setq fp-timer (run-with-timer 1 (- 1 fireplace-fury)
-					  'draw-fireplace fireplace-buffer-name fireplace-flame-pos fp-flame-width))))
+    (setq fireplace--timer (run-with-timer 1 (- 1 fireplace-fury)
+            'draw-fireplace fireplace-buffer-name fireplace-flame-pos fireplace--flame-width))))
 
 (defun fireplace-off ()
   "Put out the fire."
   (interactive)
-  (when fp-timer
-    (cancel-timer fp-timer)
+  (when fireplace--timer
+    (cancel-timer fireplace--timer)
     (kill-buffer fireplace-buffer-name)))
 
 (defun fireplace-down ()
   (interactive)
   "Push the fire further down"
-  (setq fp-bkgd-height (+ fp-bkgd-height 1)))
+  (setq fireplace--bkgd-height (+ fireplace--bkgd-height 1)))
 
 
 (defun fireplace-up ()
   (interactive)
   "Move the fire further up"
-  (setq fp-bkgd-height (max 0 (- fp-bkgd-height 1))))
+  (setq fireplace--bkgd-height (max 0 (- fireplace--bkgd-height 1))))
 
 (defun fireplace-toggle-smoke ()
   (interactive)
