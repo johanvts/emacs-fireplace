@@ -26,6 +26,7 @@ Key bind                  Function
 ``C-+``                   Move fire up
 ``C--``                   Move fire down
 ``C-*``                   Toggle smoke
+``q``                     Turn off fire
 ========================= ================================
 
 All variables starting with ''fireplace-'' can be customized. Use ''C-h v'' to  read their documentation.
