@@ -24,10 +24,10 @@ Key bind                  Function
 ========================= ================================
 ``C-+``                   Move fire up
 ``C--``                   Move fire down
-``C-s``                   Toggle smoke
+``C-*``                   Toggle smoke
 ========================= ================================
 
-All variables starting with ''fireplace-'' can be customized. Use ''C-h v'' to  read their documentation. 
+All variables starting with ''fireplace-'' can be customized. Use ''C-h v'' to  read their documentation.
 
 Acknowledgment
 --------------
