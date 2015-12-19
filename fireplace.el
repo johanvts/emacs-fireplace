@@ -26,28 +26,41 @@
 ;; Puts your emacs on fire
 
 ;;; Code:
+
+(defgroup fireplace nil
+  "Config for `fireplace' ."
+  :group 'applications)
+
+
 ;; User definable Variables
-(defvar fireplace-smoke-on nil
-  "Controls if smoke is drawn of not.")
+(defcustom fireplace-smoke-on nil
+  "Controls if smoke is drawn of not."
+  :type 'string :group 'fireplace)
 
-(defvar fireplace-fury 0.85
-  "The redraw speed of the fire. Between 0 and 1.")
+(defcustom fireplace-fury 0.85
+  "The redraw speed of the fire. Between 0 and 1."
+  :type 'float :group 'fireplace)
 
-(defvar fireplace-smoke-char ?\*
-  "Char used for drawing smoke.")
+(defcustom fireplace-smoke-char ?\*
+  "Char used for drawing smoke."
+  :type 'character :group 'fireplace)
 
-(defvar fireplace-background-char ?\s
-  "Char used for filling in the background.")
+(defcustom fireplace-background-char ?\s
+  "Char used for filling in the background."
+  :type 'character :group 'fireplace)
 
-(defvar fireplace-fill-char ?\s
-  "Char used for drawing smoke.")
+(defcustom fireplace-fill-char ?\s
+  "Char used for drawing smoke."
+  :type 'character :group 'fireplace)
 
-(defvar fireplace-flame-pos '(0.5 0.2 0.8 0.36 0.64 )
-  "Relative position and order for drawing flames.")
+(defcustom fireplace-flame-pos '(0.5 0.2 0.8 0.36 0.64 )
+  "Relative position and order for drawing flames."
+  :type '(list float) :group 'fireplace)
 
 
-(defvar fireplace-buffer-name  "*fireplace*"
-  "Default name for fireplace buffer.")
+(defcustom fireplace-buffer-name  "*fireplace*"
+  "Default name for fireplace buffer."
+  :type 'string :group 'fireplace)
 
 ;; Program controlled variables
 
