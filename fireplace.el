@@ -178,7 +178,7 @@
 
 (define-key fireplace-mode-map (kbd "C-+") 'fireplace-down)
 (define-key fireplace-mode-map (kbd "C--") 'fireplace-up)
-(define-key fireplace-mode-map (kbd "C-s") 'fireplace-toggle-smoke)
+(define-key fireplace-mode-map (kbd "C-*") 'fireplace-toggle-smoke)
 
 (provide 'fireplace)
 ;;; fireplace.el ends here
