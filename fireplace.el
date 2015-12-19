@@ -156,7 +156,6 @@
   "Turn on the fire like it's winter."
   (interactive "P")
   (with-current-buffer (get-buffer-create fireplace-buffer-name)
-    (buffer-disable-undo)
     (setq cursor-type nil)
     (buffer-disable-undo)
     (switch-to-buffer fireplace-buffer-name)
