@@ -47,7 +47,7 @@ Use ``M-x customize-group RET fireplace RET`` to view and change the user define
 Manual Installation
 ------------
 
-If ever you don't want to use melpa to install this package, follow this steps:
+If you don't want to use melpa to install this package, follow these steps:
 
 Download ``fireplace.el`` and place it somewhere in your ``.emacs.d`` directory, say in ``.emacs.d/fireplace/``.
 Compile the file using ``M-x byte-compile-file``.
