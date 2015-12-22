@@ -25,7 +25,7 @@ A cozy fireplace for emacs.
 Usage
 -----
 
-After you installed the `fireplace` package from `melpa<http://melpa.org/#/>`_
+After you installed the `fireplace` package from `melpa <http://melpa.org/#/>`_
 you can start the fire using ``M-x fireplace``.
 
 
