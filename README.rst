@@ -1,6 +1,21 @@
 emacs-fireplace
 ================
 
+.. image:: https://api.travis-ci.org/johanvts/emacs-fireplace.svg
+   :target: https://travis-ci.org/johanvts/emacs-fireplace
+.. image:: https://coveralls.io/repos/johanvts/emacs-fireplace/badge.svg
+   :target: https://coveralls.io/r/johanvts/emacs-fireplace
+.. image:: http://melpa.org/packages/fireplace-badge.svg
+   :target: http://melpa.org/#/fireplace
+.. image:: http://stable.melpa.org/packages/fireplace-badge.svg
+   :target: http://stable.melpa.org/#/fireplace
+.. image:: https://img.shields.io/github/tag/johanvts/emacs-fireplace.svg
+   :target: https://github.com/johanvts/emacs-fireplace/tags
+.. image:: http://img.shields.io/:license-gpl3-blue.svg
+   :target: http://www.gnu.org/licenses/gpl-3.0.html
+
+.. |br| raw:: html
+
 .. image:: https://raw.github.com/johanvts/emacs-fireplace/master/img/fireplace.gif
 
 About
