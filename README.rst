@@ -49,6 +49,5 @@ or on twitter @johanvts.
 
 To-Do
 -----
-- Get the package into MELPA.
 - Better status bar
-- Support using ''kill-buffer'' to turn the fire off.
+- Custom faces support
