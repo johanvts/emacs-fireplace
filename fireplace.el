@@ -1,7 +1,7 @@
 ;;; fireplace.el --- A cozy fireplace for emacs      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2015 Johan Sivertsen
-;;; Version: 0.2
+;;; Version: 1.0
 ;;; Author: Johan Sivertsen <johanvts@gmail.com>
 ;;; URL: https://github.com/johanvts/emacs-fireplace
 ;;; Released: December 2015
@@ -85,7 +85,7 @@
 
 
 (defun draw-flame-stripe (x y width)
-  "Draw fire stripes."
+  "Draw flame stripe."
   (fireplace--gotoxy x y)
   (let* ((actual-width (min width (1+ (- fireplace--bkgd-width x))))
 	 (hot-core (/ actual-width 2)))
@@ -99,7 +99,7 @@
 				      'face `(:background ,"dark orange"))))))
 
 (defun fireplace--smoke (x height)
-  "Draw fire smoke."
+  "Draw one random smoke."
   (fireplace--gotoxy (if (>(random 3) 1)
         (+ x (random (/ fireplace--bkgd-width 5)))
       (max 0 (- x (random (/ fireplace--bkgd-width 5)))))
@@ -109,7 +109,7 @@
 		      'face `(:foreground, "slate grey"))))
 
 (defun fireplace--flame (middle h)
-  "Draw fire flames."
+  "Draw a flame."
   (setq cursor-type nil)
   (let* ((width h)
 	 (lower (truncate(* 0.2 h)))
@@ -153,7 +153,7 @@
 ;; Commands
 ;;;###autoload
 (defun fireplace (arg)
-  "Turn on the fire like it's winter."
+  "Light the fire."
   (interactive "P")
   (with-current-buffer (get-buffer-create fireplace-buffer-name)
     (setq cursor-type nil)
