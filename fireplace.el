@@ -62,14 +62,32 @@
   "Default name for fireplace buffer."
   :type 'string :group 'fireplace)
 
-;; Program controlled variables
+;;; Faces
+(defgroup fireplace-face nil
+  "Faces for `fireplace'."
+  :group 'fireplace)
 
+(defface fireplace-outter-flame-face
+  '((t (:background "orange red")))
+  "Color of the core of the flame."
+  :group 'fireplace-faces)
+
+(defface fireplace-inner-flame-face
+  '((t (:background "dark orange")))
+  "Color of the core of the flame."
+  :group 'fireplace-faces)
+(defface fireplace-smoke-face
+  '((t (:foreground "slate grey")))
+  "Color of the smoke."
+  :group 'fireplace-faces)
+
+;;; Program controlled variables
 (defvar fireplace--bkgd-height "Used for fireplace height, will be set from windows size")
 (defvar fireplace--bkgd-width "Used for fireplace width, will be set from windows size")
 (defvar fireplace--timer "Holds the active fireplace, kill using fireplace-off")
 (defvar fireplace--flame-width "Calculated width of flames")
 
-;; Helper routines
+;;; Helper routines
 
 (defun fireplace--make-grid ()
   "Redraw backgound of buffer."
@@ -91,12 +109,12 @@
 	 (hot-core (/ actual-width 2)))
     (delete-char actual-width)
     (insert (propertize (make-string actual-width fireplace-fill-char)
-			'face `(:background ,"orange red")))
+      'face 'fireplace-outter-flame-face))
     (when (> hot-core 1)
       (fireplace--gotoxy (+ x (/ hot-core 2)) y)
       (delete-char hot-core)
       (insert (propertize (make-string hot-core fireplace-fill-char)
-				      'face `(:background ,"dark orange"))))))
+              'face 'fireplace-inner-flame-face)))))
 
 (defun fireplace--smoke (x height)
   "Draw one random smoke."
@@ -106,7 +124,7 @@
     (+ height (random (- fireplace--bkgd-height height))))
   (delete-char 1)
   (insert (propertize (make-string 1 fireplace-smoke-char)
-		      'face `(:foreground, "slate grey"))))
+          'face 'fireplace-smoke-face)))
 
 (defun fireplace--flame (middle h)
   "Draw a flame."
