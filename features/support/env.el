@@ -1,21 +1,21 @@
 (require 'f)
 
-(defvar emacs-fireplace-support-path
+(defvar fireplace-support-path
   (f-dirname load-file-name))
 
-(defvar emacs-fireplace-features-path
-  (f-parent emacs-fireplace-support-path))
+(defvar fireplace-features-path
+  (f-parent fireplace-support-path))
 
-(defvar emacs-fireplace-root-path
-  (f-parent emacs-fireplace-features-path))
+(defvar fireplace-root-path
+  (f-parent fireplace-features-path))
 
-(add-to-list 'load-path emacs-fireplace-root-path)
+(add-to-list 'load-path fireplace-root-path)
 
 (require 'undercover)
 (undercover "*.el"
 	    (:exclude "*-test.el")
 	    (:report-file "/tmp/undercover-report.json"))
-(require 'emacs-fireplace)
+(require 'fireplace)
 (require 'espuds)
 (require 'ert)
 
