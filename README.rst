@@ -66,3 +66,4 @@ To-Do
 -----
 - Better status bar
 - Custom faces support
+- Locally override some of the offending settings from `Issue #10 <https://github.com/johanvts/emacs-fireplace/issues/10>`_
