@@ -106,7 +106,7 @@
   "Draw flame stripe."
   (fireplace--gotoxy x y)
   (let* ((actual-width (min width (1+ (- fireplace--bkgd-width x))))
-	 (hot-core (/ actual-width 2)))
+         (hot-core (/ actual-width 2)))
     (delete-char actual-width)
     (insert (propertize (make-string actual-width fireplace-fill-char)
       'face 'fireplace-outter-flame-face))
@@ -118,9 +118,10 @@
 
 (defun fireplace--smoke (x height)
   "Draw one random smoke."
-  (fireplace--gotoxy (if (>(random 3) 1)
+  (fireplace--gotoxy
+    (if (>(random 3) 1)
         (+ x (random (/ fireplace--bkgd-width 5)))
-      (max 0 (- x (random (/ fireplace--bkgd-width 5)))))
+        (max 0 (- x (random (/ fireplace--bkgd-width 5)))))
     (+ height (random (- fireplace--bkgd-height height))))
   (delete-char 1)
   (insert (propertize (make-string 1 fireplace-smoke-char)
@@ -130,10 +131,10 @@
   "Draw a flame."
   (setq cursor-type nil)
   (let* ((width h)
-	 (lower (truncate(* 0.2 h)))
-	 (high (- h lower))
-	 x
-	 line)
+         (lower (truncate (* 0.2 h)))
+         (high (- h lower))
+         x
+         line)
     (dotimes (y lower)
       (setq width (+ width y)
             x (- middle (/ width 2)))
@@ -144,9 +145,9 @@
         (setq width (- fireplace--bkgd-width x)))
       (draw-flame-stripe x y width))
     (dotimes (y high)
-      (setq line (+ lower y))
-      (setq width (max 0 (- width 1 (random 3))))
-      (setq x (- middle (/ width 2)))
+      (setq line (+ lower y)
+            width (max 0 (- width 1 (random 3)))
+            x (- middle (/ width 2)))
       (when (< x 0)
         (setq width (+ width x)
               x 0))
@@ -162,9 +163,8 @@
     (fireplace--make-grid)
     (dolist (pos flame-pos)
       (fireplace--flame (round (* pos fireplace--bkgd-width))
-	     (+
-	      (round (* (+ 0.2 (min pos (- 1 pos))) flame-width))
-	      (random 3))))
+       (+ (round (* (+ 0.2 (min pos (- 1 pos))) flame-width))
+          (random 3))))
     (setq buffer-read-only t)))
 
 
@@ -206,9 +206,7 @@
 (defun fireplace-toggle-smoke ()
   "Toggle smoke on/off."
   (interactive)
-  (if fireplace-smoke-on
-      (setq fireplace-smoke-on nil)
-    (setq fireplace-smoke-on t)))
+  (setq fireplace-smoke-on (not fireplace-smoke-on)))
 
 ;;; Key-bindings
 
