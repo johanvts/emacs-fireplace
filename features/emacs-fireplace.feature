@@ -1,11 +1,8 @@
-Feature: Do Some things
-  In order to do something
-  As a user
-  I want to do something
+Feature: Putting Emacs on Fire
+  In order to do get warm in the winter
+  As a cool emacs users
+  I want to get some warmth from my favorite editor
 
-  Scenario: Do Something
-    Given I have "something"
-    When I have "something"
-    Then I should have "something"
-    And I should have "something"
-    But I should not have "something"
+  Scenario: Turn on the fire
+    When I call "fireplace"
+    Then I should be in buffer "*fireplace*"
