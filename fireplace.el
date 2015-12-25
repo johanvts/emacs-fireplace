@@ -63,7 +63,7 @@
   :type 'string :group 'fireplace)
 
 ;;; Faces
-(defgroup fireplace-face nil
+(defgroup fireplace-faces nil
   "Faces for `fireplace'."
   :group 'fireplace)
 

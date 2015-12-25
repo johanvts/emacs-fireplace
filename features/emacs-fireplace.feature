@@ -8,7 +8,23 @@ Feature: Putting Emacs on Fire
     Then there is a "*fireplace*" buffer
 
 
-Scenario: Turn on the fire and then off
+  Scenario: Turn on the fire and then off
     When I call "fireplace"
     And  I call "fireplace-off"
     Then I should be in buffer "*scratch*"
+
+  Scenario: I can customize general setting
+    When I try to configure "fireplace"
+    Then I should be in buffer "*Customize Group: Fireplace*"
+    And I should see "Fireplace Background Char"
+    And I should see "Fireplace Buffer Name"
+    And I should see "Fireplace Fury"
+    And I should see "Fireplace Smoke Char"
+
+
+  Scenario: I can customize faces
+    When I try to configure "fireplace-faces"
+    Then I should be in buffer "*Customize Group: Fireplace Faces*"
+    And I should see "Fireplace Inner Flame Face"
+    And I should see "Fireplace Outter Flame Face"
+    And I should see "Fireplace Smoke Face"
