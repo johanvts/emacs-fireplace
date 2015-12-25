@@ -29,6 +29,7 @@
 
 (After
  ;; After each scenario is run
+ ;; (fireplace-off) ; so far it break if no fireplace buffer
  )
 
 (Teardown

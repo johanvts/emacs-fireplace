@@ -5,4 +5,10 @@ Feature: Putting Emacs on Fire
 
   Scenario: Turn on the fire
     When I call "fireplace"
-    Then I should be in buffer "*fireplace*"
+    Then there is a "*fireplace*" buffer
+
+
+Scenario: Turn on the fire and then off
+    When I call "fireplace"
+    And  I call "fireplace-off"
+    Then I should be in buffer "*scratch*"
