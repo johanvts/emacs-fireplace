@@ -75,3 +75,4 @@ To-Do
 - Better status bar
 - Custom faces support
 - Locally override some of the offending settings from `Issue #10 <https://github.com/johanvts/emacs-fireplace/issues/10>`_
+- Automatically scale fire if the user alters the window size after starting the fire, see `Issue #20 <https://github.com/johanvts/emacs-fireplace/issues/20>`_
