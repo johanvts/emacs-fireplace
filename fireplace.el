@@ -1,7 +1,7 @@
 ;;; fireplace.el --- A cozy fireplace for emacs      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2015 Johan Sivertsen
-;;; Version: 1.0
+;;; Version: 1.1
 ;;; Author: Johan Sivertsen <johanvts@gmail.com>
 ;;; URL: https://github.com/johanvts/emacs-fireplace
 ;;; Released: December 2015
