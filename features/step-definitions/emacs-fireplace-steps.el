@@ -10,3 +10,7 @@
 (Then "^there is a \"\\([^\"]+\\)\" buffer$"
       (lambda (buffer-name)
         (get-buffer buffer-name)))
+
+(When "^I wait for \\([0-9]+\\) second$"
+     (lambda (time)
+       (sleep-for (string-to-number time))))

@@ -28,3 +28,11 @@ Feature: Putting Emacs on Fire
     And I should see "Fireplace Inner Flame Face"
     And I should see "Fireplace Outter Flame Face"
     And I should see "Fireplace Smoke Face"
+
+
+  Scenario: Turn on the fire and then off
+    When I call "fireplace"
+    And  I switch to buffer "*fireplace*"
+    And  I call "fireplace-toggle-smoke"
+    And  I wait for 1 second
+    # Then I should see "*" # see then
