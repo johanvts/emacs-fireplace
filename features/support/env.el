@@ -29,6 +29,8 @@
 
 (After
  ;; After each scenario is run
+ (get-buffer-create "*fireplace*")
+ (fireplace-off) ; so far it break if no fireplace buffer
  )
 
 (Teardown

@@ -44,8 +44,17 @@ Key bind                  Function
 
 Use ``M-x customize-group RET fireplace RET`` to view and change the user defined variables and read their documentation.
 
+Configuration
+-------------
+
+You can tweak the setting of `fireplace` the way you please with the ``customize-group``
+`fireplace` and `fireplace-faces`.
+
+Among the options, the name of the buffer, the frequency of refresh, the smoke char,
+or the faces used in the fireplace.
+
 Manual Installation
-------------
+-------------------
 
 If you don't want to use melpa to install this package, follow these steps:
 
@@ -73,6 +82,5 @@ or on twitter @johanvts.
 To-Do
 -----
 - Better status bar
-- Custom faces support
 - Locally override some of the offending settings from `Issue #10 <https://github.com/johanvts/emacs-fireplace/issues/10>`_
 - Automatically scale fire if the user alters the window size after starting the fire, see `Issue #20 <https://github.com/johanvts/emacs-fireplace/issues/20>`_

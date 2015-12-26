@@ -2,27 +2,11 @@
 ;; files in this directory whose names end with "-steps.el" will be
 ;; loaded automatically by Ecukes.
 
-(Given "^I have \"\\(.+\\)\"$"
-  (lambda (something)
-    ;; ...
-    ))
+(When "^I try to configure \"\\([^\"]+\\)\"$"
+      (lambda (group)
+        (shut-up
+         (customize-group group))))
 
-(When "^I have \"\\(.+\\)\"$"
-  (lambda (something)
-    ;; ...
-    ))
-
-(Then "^I should have \"\\(.+\\)\"$"
-  (lambda (something)
-    ;; ...
-    ))
-
-(And "^I have \"\\(.+\\)\"$"
-  (lambda (something)
-    ;; ...
-    ))
-
-(But "^I should not have \"\\(.+\\)\"$"
-  (lambda (something)
-    ;; ...
-    ))
+(Then "^there is a \"\\([^\"]+\\)\" buffer$"
+      (lambda (buffer-name)
+        (get-buffer buffer-name)))

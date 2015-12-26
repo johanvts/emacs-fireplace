@@ -1,11 +1,30 @@
-Feature: Do Some things
-  In order to do something
-  As a user
-  I want to do something
+Feature: Putting Emacs on Fire
+  In order to do get warm in the winter
+  As a cool emacs users
+  I want to get some warmth from my favorite editor
 
-  Scenario: Do Something
-    Given I have "something"
-    When I have "something"
-    Then I should have "something"
-    And I should have "something"
-    But I should not have "something"
+  Scenario: Turn on the fire
+    When I call "fireplace"
+    Then there is a "*fireplace*" buffer
+
+
+  Scenario: Turn on the fire and then off
+    When I call "fireplace"
+    And  I call "fireplace-off"
+    Then I should be in buffer "*scratch*"
+
+  Scenario: I can customize general setting
+    When I try to configure "fireplace"
+    Then I should be in buffer "*Customize Group: Fireplace*"
+    And I should see "Fireplace Background Char"
+    And I should see "Fireplace Buffer Name"
+    And I should see "Fireplace Fury"
+    And I should see "Fireplace Smoke Char"
+
+
+  Scenario: I can customize faces
+    When I try to configure "fireplace-faces"
+    Then I should be in buffer "*Customize Group: Fireplace Faces*"
+    And I should see "Fireplace Inner Flame Face"
+    And I should see "Fireplace Outter Flame Face"
+    And I should see "Fireplace Smoke Face"
