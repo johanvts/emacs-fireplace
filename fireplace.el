@@ -169,16 +169,23 @@
           (random 3))))
     (setq buffer-read-only t)))
 
-(defun fireplace--disable-minor-modes()
+(defun fireplace--disable-minor-modes ()
   "Disable minor modes that might affect rendering."
   (switch-to-buffer fireplace-buffer-name)
   (setq truncate-lines t
-        cursor nil
+        cursor-type nil
         show-trailing-whitespace nil
         show-leading-whitespace nil
         indicate-empty-lines nil)
   (transient-mark-mode nil)
   (buffer-disable-undo))
+
+(defun fireplace--update-locals-vars ()
+  "Update `fireplace' local variables."
+  (setq fireplace--bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))
+        fireplace--bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name)))
+        fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5)))
+        fireplace--flame-pos fireplace-flame-pos))
 
 ;; Commands
 ;;;###autoload
@@ -186,13 +193,10 @@
   "Light the fire."
   (interactive "P")
   (with-current-buffer (get-buffer-create fireplace-buffer-name)
-    (setq cursor-type nil)
-    (setq fireplace--bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))
-          fireplace--bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name)))
-          fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5)))
-          fireplace--flame-pos fireplace-flame-pos)
+    (fireplace--update-locals-vars)
     (fireplace--make-grid)
     (fireplace-mode)
+    (add-hook 'window-size-change-functions 'fireplace--update-locals-vars)
     (fireplace--disable-minor-modes)
     (setq fireplace--timer
           (run-with-timer 1 (- 1 fireplace-fury)
@@ -201,6 +205,7 @@
 (defun fireplace-off ()
   "Put out the fire."
   (interactive)
+  (remove-hook 'window-size-change-functions 'fireplace--update-locals-vars)
   (when fireplace--timer
     (cancel-timer fireplace--timer)
     (kill-buffer fireplace-buffer-name)))
