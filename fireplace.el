@@ -1,7 +1,7 @@
 ;;; fireplace.el --- A cozy fireplace for emacs      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2015 Johan Sivertsen
-;;; Version: 1.1
+;;; Version: 1.1.1
 ;;; Author: Johan Sivertsen <johanvts@gmail.com>
 ;;; URL: https://github.com/johanvts/emacs-fireplace
 ;;; Released: December 2015
@@ -167,6 +167,16 @@
           (random 3))))
     (setq buffer-read-only t)))
 
+(defun fireplace--disable-minor-modes()
+  "Disable minor modes that might affect rendering."
+  (switch-to-buffer fireplace-buffer-name)
+  (setq truncate-lines t
+        cursor nil
+        show-trailing-whitespace nil
+        show-leading-whitespace nil
+        indicate-empty-lines nil)
+  (transient-mark-mode nil)
+  (buffer-disable-undo))
 
 ;; Commands
 ;;;###autoload
@@ -175,13 +185,12 @@
   (interactive "P")
   (with-current-buffer (get-buffer-create fireplace-buffer-name)
     (setq cursor-type nil)
-    (buffer-disable-undo)
-    (switch-to-buffer fireplace-buffer-name)
     (setq fireplace--bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))
           fireplace--bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name)))
           fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5))))
     (fireplace--make-grid)
     (fireplace-mode)
+    (fireplace--disable-minor-modes)
     (setq fireplace--timer (run-with-timer 1 (- 1 fireplace-fury)
             'draw-fireplace fireplace-buffer-name fireplace-flame-pos fireplace--flame-width))))
 
@@ -216,6 +225,7 @@
 (define-key fireplace-mode-map (kbd "C--") 'fireplace-up)
 (define-key fireplace-mode-map (kbd "C-*") 'fireplace-toggle-smoke)
 (define-key fireplace-mode-map (kbd "q") 'fireplace-off)
+(define-key fireplace-mode-map (kbd "Q") 'fireplace-off)
 
 (provide 'fireplace)
 ;;; fireplace.el ends here
