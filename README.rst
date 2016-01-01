@@ -18,9 +18,9 @@ emacs-fireplace
 
 .. image:: https://raw.github.com/johanvts/emacs-fireplace/master/img/fireplace.gif
 
-About
------
-A cozy fireplace for emacs.
+..
+
+     A cozy fireplace for emacs.
 
 Usage
 -----
@@ -47,8 +47,8 @@ Use ``M-x customize-group RET fireplace RET`` to view and change the user define
 Configuration
 -------------
 
-You can tweak the setting of `fireplace` the way you please with the ``customize-group``
-`fireplace` and `fireplace-faces`.
+You can tweak the setting of ``fireplace`` the way you please with the ``customize-group``
+``fireplace`` and ``fireplace-faces``.
 
 Among the options, the name of the buffer, the frequency of refresh, the smoke char,
 or the faces used in the fireplace.
@@ -61,8 +61,8 @@ If you don't want to use melpa to install this package, follow these steps:
 Download ``fireplace.el`` and place it somewhere in your ``.emacs.d`` directory, say in ``.emacs.d/fireplace/``.
 Compile the file using ``M-x byte-compile-file``.
 Put ``(load "~/.emacs.d/fireplace/fireplace")`` in your init file (``.emacs``).
-Note that there is a significant performance difference between the compiled and non-compiled fireplace.
 
+Note that there is a significant performance difference between the compiled and non-compiled fireplace.
 
 Acknowledgment
 --------------
@@ -75,6 +75,7 @@ Contribution
 ------------
 
 Please feel free to do whatever you want with this code.
+
 Ideas and pull requests are very welcome. I can be reached through johanvts@gmail.com
 or on twitter @johanvts.
 
@@ -82,5 +83,3 @@ or on twitter @johanvts.
 To-Do
 -----
 - Better status bar
-- Locally override some of the offending settings from `Issue #10 <https://github.com/johanvts/emacs-fireplace/issues/10>`_
-- Automatically scale fire if the user alters the window size after starting the fire, see `Issue #20 <https://github.com/johanvts/emacs-fireplace/issues/20>`_
