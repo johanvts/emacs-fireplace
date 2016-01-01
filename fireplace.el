@@ -182,8 +182,8 @@
 
 (defun fireplace--update-locals-vars ()
   "Update `fireplace' local variables."
-  (setq fireplace--bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))
-        fireplace--bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name)))
+  (setq fireplace--bkgd-height (- (floor (window-height (get-buffer-window fireplace-buffer-name))) 1)
+        fireplace--bkgd-width  (- (round (window-width (get-buffer-window fireplace-buffer-name))) 1)
         fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5)))
         fireplace--flame-pos fireplace-flame-pos))
 
