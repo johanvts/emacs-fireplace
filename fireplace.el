@@ -86,6 +86,8 @@
 (defvar fireplace--bkgd-width "Used for fireplace width, will be set from windows size")
 (defvar fireplace--timer "Holds the active fireplace, kill using fireplace-off")
 (defvar fireplace--flame-width "Calculated width of flames")
+(defvar fireplace--flame-pos "Flame position")
+(defvar fireplace--flame-width "Flame width")
 
 ;;; Helper routines
 
@@ -156,14 +158,14 @@
       (draw-flame-stripe x line width)
       (when fireplace-smoke-on (fireplace--smoke x h)))))
 
-(defun draw-fireplace (buffer-name flame-pos flame-width)
+(defun fireplace-draw (buffer-name)
   "Draw the whole fireplace in BUFFER-NAME from FLAME-POS with FLAME-WIDTH."
   (with-current-buffer (get-buffer-create buffer-name)
     (setq buffer-read-only nil)
     (fireplace--make-grid)
-    (dolist (pos flame-pos)
+    (dolist (pos fireplace--flame-pos)
       (fireplace--flame (round (* pos fireplace--bkgd-width))
-       (+ (round (* (+ 0.2 (min pos (- 1 pos))) flame-width))
+       (+ (round (* (+ 0.2 (min pos (- 1 pos))) fireplace--flame-width))
           (random 3))))
     (setq buffer-read-only t)))
 
@@ -187,12 +189,14 @@
     (setq cursor-type nil)
     (setq fireplace--bkgd-height (round (window-height (get-buffer-window fireplace-buffer-name)))
           fireplace--bkgd-width  (round (window-width (get-buffer-window fireplace-buffer-name)))
-          fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5))))
+          fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5)))
+          fireplace--flame-pos fireplace-flame-pos)
     (fireplace--make-grid)
     (fireplace-mode)
     (fireplace--disable-minor-modes)
-    (setq fireplace--timer (run-with-timer 1 (- 1 fireplace-fury)
-            'draw-fireplace fireplace-buffer-name fireplace-flame-pos fireplace--flame-width))))
+    (setq fireplace--timer
+          (run-with-timer 1 (- 1 fireplace-fury)
+                          'fireplace-draw fireplace-buffer-name))))
 
 (defun fireplace-off ()
   "Put out the fire."
