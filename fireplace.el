@@ -180,7 +180,7 @@
   (transient-mark-mode nil)
   (buffer-disable-undo))
 
-(defun fireplace--update-locals-vars ()
+(defun fireplace--update-locals-vars (&optional frame)
   "Update `fireplace' local variables."
   (setq fireplace--bkgd-height (- (floor (window-height (get-buffer-window fireplace-buffer-name))) 1)
         fireplace--bkgd-width  (- (round (window-width (get-buffer-window fireplace-buffer-name))) 1)
