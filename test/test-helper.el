@@ -42,5 +42,4 @@
 	    (:report-file "/tmp/undercover-report.json"))
 (require 'fireplace)
 
-(provide 'test-helper)
 ;;; test-helper.el ends here
