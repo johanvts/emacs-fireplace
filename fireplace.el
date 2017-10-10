@@ -230,8 +230,8 @@
 
 (define-derived-mode fireplace-mode special-mode  "A cozy fireplace.")
 
-(define-key fireplace-mode-map (kbd "C-+") 'fireplace-down)
-(define-key fireplace-mode-map (kbd "C--") 'fireplace-up)
+(define-key fireplace-mode-map (kbd "C-+") 'fireplace-up)
+(define-key fireplace-mode-map (kbd "C--") 'fireplace-down)
 (define-key fireplace-mode-map (kbd "C-*") 'fireplace-toggle-smoke)
 (define-key fireplace-mode-map (kbd "q") 'fireplace-off)
 (define-key fireplace-mode-map (kbd "Q") 'fireplace-off)
