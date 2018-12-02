@@ -207,7 +207,7 @@
     (fireplace--update-locals-vars)
     (fireplace--make-grid)
     (fireplace-mode)
-    (add-hook 'window-size-change-functions 'fireplace--update-locals-vars)
+    (add-hook 'window-size-change-functions 'fireplace--update-locals-vars nil t)
     (fireplace--disable-minor-modes)
     (setq fireplace--timer
           (run-with-timer 1 (- 1 fireplace-fury)
@@ -216,7 +216,6 @@
 (defun fireplace-off ()
   "Put out the fire."
   (interactive)
-  (remove-hook 'window-size-change-functions 'fireplace--update-locals-vars)
   (when fireplace--timer
     (cancel-timer fireplace--timer)
     (kill-buffer fireplace-buffer-name)))
