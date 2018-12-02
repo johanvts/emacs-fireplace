@@ -229,13 +229,18 @@
 
 ;;; Key-bindings
 
-(define-derived-mode fireplace-mode special-mode  "A cozy fireplace.")
+(defvar fireplace-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-+") 'fireplace-up)
+    (define-key map (kbd "C--") 'fireplace-down)
+    (define-key map (kbd "C-*") 'fireplace-toggle-smoke)
+    (define-key map (kbd "q") 'fireplace-off)
+    (define-key map (kbd "Q") 'fireplace-off)
+    map)
+  "Keymap for `fireplace-mode'.")
 
-(define-key fireplace-mode-map (kbd "C-+") 'fireplace-up)
-(define-key fireplace-mode-map (kbd "C--") 'fireplace-down)
-(define-key fireplace-mode-map (kbd "C-*") 'fireplace-toggle-smoke)
-(define-key fireplace-mode-map (kbd "q") 'fireplace-off)
-(define-key fireplace-mode-map (kbd "Q") 'fireplace-off)
+(define-derived-mode fireplace-mode special-mode  "A cozy fireplace."
+  "Major mode for *fireplace* buffers.")
 
 (provide 'fireplace)
 ;;; fireplace.el ends here
