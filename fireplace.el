@@ -114,7 +114,7 @@
   (goto-char (+ 1 x (* (- fireplace--bkgd-height (+ 1 y))
                        (+ 1 fireplace--bkgd-width)))))
 
-(defun draw-flame-stripe (x y width)
+(defun fireplace--draw-flame-stripe (x y width)
   "Draw flame stripe."
   (fireplace--gotoxy x y)
   (let* ((actual-width (min width (1+ (- fireplace--bkgd-width x))))
@@ -155,7 +155,7 @@
               x 0))
       (when (> (+ x width) fireplace--bkgd-width)
         (setq width (- fireplace--bkgd-width x)))
-      (draw-flame-stripe x y width))
+      (fireplace--draw-flame-stripe x y width))
     (dotimes (y high)
       (setq line (+ lower y)
             width (max 0 (- width 1 (random 3)))
@@ -165,7 +165,7 @@
               x 0))
       (when (> (+ x width) fireplace--bkgd-width)
         (setq width (- fireplace--bkgd-width x)))
-      (draw-flame-stripe x line width)
+      (fireplace--draw-flame-stripe x line width)
       (when fireplace-smoke-on (fireplace--smoke x h)))))
 
 (defun fireplace-draw (buffer-name)
