@@ -29,11 +29,11 @@
 ;;; Code:
 
 (defgroup fireplace nil
-  "Config for `fireplace' ."
+  "Config for `fireplace'."
   :group 'applications)
 
-
 ;; User definable Variables
+
 (defcustom fireplace-smoke-on nil
   "Controls if smoke is drawn of not."
   :type 'string :group 'fireplace)
@@ -58,12 +58,12 @@
   "Relative position and order for drawing flames."
   :type '(list float) :group 'fireplace)
 
-
 (defcustom fireplace-buffer-name  "*fireplace*"
   "Default name for fireplace buffer."
   :type 'string :group 'fireplace)
 
 ;;; Faces
+
 (defgroup fireplace-faces nil
   "Faces for `fireplace'."
   :group 'fireplace)
@@ -77,20 +77,26 @@
   '((t (:background "dark orange")))
   "Color of the core of the flame."
   :group 'fireplace-faces)
+
 (defface fireplace-smoke-face
   '((t (:foreground "slate grey")))
   "Color of the smoke."
   :group 'fireplace-faces)
 
 ;;; Program controlled variables
+
 (defvar fireplace--bkgd-height nil
   "Used for fireplace height, will be set from windows size")
+
 (defvar fireplace--bkgd-width nil
   "Used for fireplace width, will be set from windows size")
+
 (defvar fireplace--timer nil
   "Holds the active fireplace, kill using fireplace-off")
+
 (defvar fireplace--flame-width nil
   "Calculated width of flames")
+
 (defvar fireplace--flame-pos nil
   "Flame position")
 
@@ -103,11 +109,10 @@
     (insert-char fireplace-background-char fireplace--bkgd-width)
     (newline)))
 
-(defun fireplace--gotoxy(x y)
+(defun fireplace--gotoxy (x y)
   "Move pointer to position X Y."
   (goto-char (+ 1 x (* (- fireplace--bkgd-height (+ 1 y))
                        (+ 1 fireplace--bkgd-width)))))
-
 
 (defun draw-flame-stripe (x y width)
   "Draw flame stripe."
@@ -116,23 +121,23 @@
          (hot-core (/ actual-width 2)))
     (delete-char actual-width)
     (insert (propertize (make-string actual-width fireplace-fill-char)
-      'face 'fireplace-outter-flame-face))
+                        'face 'fireplace-outter-flame-face))
     (when (> hot-core 1)
       (fireplace--gotoxy (+ x (/ hot-core 2)) y)
       (delete-char hot-core)
       (insert (propertize (make-string hot-core fireplace-fill-char)
-              'face 'fireplace-inner-flame-face)))))
+                          'face 'fireplace-inner-flame-face)))))
 
 (defun fireplace--smoke (x height)
   "Draw one random smoke."
   (fireplace--gotoxy
-    (if (>(random 3) 1)
-        (+ x (random (/ fireplace--bkgd-width 5)))
-        (max 0 (- x (random (/ fireplace--bkgd-width 5)))))
-    (+ height (random (- fireplace--bkgd-height height))))
+   (if (>(random 3) 1)
+       (+ x (random (/ fireplace--bkgd-width 5)))
+     (max 0 (- x (random (/ fireplace--bkgd-width 5)))))
+   (+ height (random (- fireplace--bkgd-height height))))
   (delete-char 1)
   (insert (propertize (make-string 1 fireplace-smoke-char)
-          'face 'fireplace-smoke-face)))
+                      'face 'fireplace-smoke-face)))
 
 (defun fireplace--flame (middle h)
   "Draw a flame."
@@ -193,6 +198,7 @@
         fireplace--flame-pos fireplace-flame-pos))
 
 ;; Commands
+
 ;;;###autoload
 (defun fireplace (arg)
   "Light the fire."
@@ -219,7 +225,6 @@
   "Push the fire further down"
   (interactive)
   (setq fireplace--bkgd-height (+ fireplace--bkgd-height 1)))
-
 
 (defun fireplace-up ()
   "Move the fire further up."
