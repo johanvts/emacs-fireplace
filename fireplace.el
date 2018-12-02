@@ -105,7 +105,7 @@
 (defun fireplace--make-grid ()
   "Redraw backgound of buffer."
   (erase-buffer)
-  (dotimes (i fireplace--bkgd-height)
+  (dotimes (_ fireplace--bkgd-height)
     (insert-char fireplace-background-char fireplace--bkgd-width)
     (newline)))
 
@@ -190,7 +190,7 @@
   (transient-mark-mode nil)
   (buffer-disable-undo))
 
-(defun fireplace--update-locals-vars (&optional frame)
+(defun fireplace--update-locals-vars ()
   "Update `fireplace' local variables."
   (setq fireplace--bkgd-height (- (floor (window-height (get-buffer-window fireplace-buffer-name))) 1)
         fireplace--bkgd-width  (- (round (window-width (get-buffer-window fireplace-buffer-name))) 1)
@@ -200,9 +200,9 @@
 ;; Commands
 
 ;;;###autoload
-(defun fireplace (arg)
+(defun fireplace ()
   "Light the fire."
-  (interactive "P")
+  (interactive)
   (with-current-buffer (get-buffer-create fireplace-buffer-name)
     (fireplace--update-locals-vars)
     (fireplace--make-grid)

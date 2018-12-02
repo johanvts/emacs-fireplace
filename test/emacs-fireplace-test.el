@@ -13,7 +13,7 @@
 
 (ert-deftest test-fire-raging-out-of-control ()
   :expected-result :failed
-  (fireplace t)
+  (fireplace)
   (let ((buf (get-buffer "*fireplace*")))
     (should buf)
     (kill-buffer buf))
