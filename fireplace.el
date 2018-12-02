@@ -185,7 +185,6 @@
   (setq truncate-lines t
         cursor-type nil
         show-trailing-whitespace nil
-        show-leading-whitespace nil
         indicate-empty-lines nil)
   (transient-mark-mode nil)
   (buffer-disable-undo))
