@@ -83,12 +83,16 @@
   :group 'fireplace-faces)
 
 ;;; Program controlled variables
-(defvar fireplace--bkgd-height "Used for fireplace height, will be set from windows size")
-(defvar fireplace--bkgd-width "Used for fireplace width, will be set from windows size")
-(defvar fireplace--timer "Holds the active fireplace, kill using fireplace-off")
-(defvar fireplace--flame-width "Calculated width of flames")
-(defvar fireplace--flame-pos "Flame position")
-(defvar fireplace--flame-width "Flame width")
+(defvar fireplace--bkgd-height nil
+  "Used for fireplace height, will be set from windows size")
+(defvar fireplace--bkgd-width nil
+  "Used for fireplace width, will be set from windows size")
+(defvar fireplace--timer nil
+  "Holds the active fireplace, kill using fireplace-off")
+(defvar fireplace--flame-width nil
+  "Calculated width of flames")
+(defvar fireplace--flame-pos nil
+  "Flame position")
 
 ;;; Helper routines
 
