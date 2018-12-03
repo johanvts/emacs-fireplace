@@ -171,13 +171,15 @@
 (defun fireplace-draw (buffer-name)
   "Draw the whole fireplace in BUFFER-NAME from FLAME-POS with FLAME-WIDTH."
   (with-current-buffer (get-buffer-create buffer-name)
-    (setq buffer-read-only nil)
-    (fireplace--make-grid)
-    (dolist (pos fireplace--flame-pos)
-      (fireplace--flame (round (* pos fireplace--bkgd-width))
-       (+ (round (* (+ 0.2 (min pos (- 1 pos))) fireplace--flame-width))
-          (random 3))))
-    (setq buffer-read-only t)))
+    (if (not (eq major-mode 'fireplace-mode))
+        (fireplace-off)
+      (setq buffer-read-only nil)
+      (fireplace--make-grid)
+      (dolist (pos fireplace--flame-pos)
+        (fireplace--flame (round (* pos fireplace--bkgd-width))
+                          (+ (round (* (+ 0.2 (min pos (- 1 pos))) fireplace--flame-width))
+                             (random 3))))
+      (setq buffer-read-only t))))
 
 (defun fireplace--disable-minor-modes ()
   "Disable minor modes that might affect rendering."
