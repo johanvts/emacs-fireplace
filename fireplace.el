@@ -196,6 +196,10 @@
         fireplace--flame-width (min fireplace--bkgd-height (round (/ fireplace--bkgd-width 2.5)))
         fireplace--flame-pos fireplace-flame-pos))
 
+(defun fireplace--extinguish-flames ()
+  "Cancel the `fireplace-draw' timer."
+  (cancel-function-timers 'fireplace-draw))
+
 ;; Commands
 
 ;;;###autoload
@@ -208,15 +212,13 @@
     (fireplace-mode)
     (add-hook 'window-size-change-functions 'fireplace--update-locals-vars nil t)
     (fireplace--disable-minor-modes)
-    (setq fireplace--timer
-          (run-with-timer 1 (- 1 fireplace-fury)
-                          'fireplace-draw fireplace-buffer-name))))
+    (run-with-timer 1 (- 1 fireplace-fury) 'fireplace-draw fireplace-buffer-name)))
 
 (defun fireplace-off ()
   "Put out the fire."
   (interactive)
-  (when fireplace--timer
-    (cancel-timer fireplace--timer)
+  (fireplace--extinguish-flames)
+  (when (get-buffer fireplace-buffer-name)
     (kill-buffer fireplace-buffer-name)))
 
 (defun fireplace-down ()
