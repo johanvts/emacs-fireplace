@@ -39,6 +39,7 @@ Key bind                  Function
 ``C-+``                   Move fire up
 ``C--``                   Move fire down
 ``C-*``                   Toggle smoke
+``C-=``                   Toggle sound
 ``q``                     Turn off fire
 ========================= ================================
 
