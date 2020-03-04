@@ -30,9 +30,17 @@ Feature: Putting Emacs on Fire
     And I should see "Fireplace Smoke Face"
 
 
-  Scenario: Turn on the fire and then off
+  Scenario: Turn the smoke on
     When I call "fireplace"
     And  I switch to buffer "*fireplace*"
     And  I call "fireplace-toggle-smoke"
     And  I wait for 1 second
     # Then I should see "*" # see then
+
+  Scenario: Turn the noise on then made silence come back
+    When I call "fireplace"
+    And  I switch to buffer "*fireplace*"
+    And  I call "fireplace-toggle-sound"
+    And  I wait for 1 second
+    And  I call "fireplace-toggle-sound"
+    And  I wait for 1 second
