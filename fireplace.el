@@ -62,6 +62,14 @@
   "Default name for fireplace buffer."
   :type 'string :group 'fireplace)
 
+(defcustom fireplace-sound-on nil
+  "Controls if it plays sound or not."
+  :type 'string :group 'fireplace)
+
+(defcustom fireplace-sound-file-path (concat (file-name-directory load-file-name) "fireplace.mp3")
+  "Default path for fireplace sound file."
+  :type 'string :group 'fireplace)
+
 ;;; Faces
 
 (defgroup fireplace-faces nil
@@ -99,6 +107,9 @@
 
 (defvar fireplace--flame-pos nil
   "Flame position")
+
+(defvar fireplace--sound-process nil
+  "Holds sound process object, used to kill sound process")
 
 ;;; Helper routines
 
@@ -202,6 +213,24 @@
   "Cancel the `fireplace-draw' timer."
   (cancel-function-timers 'fireplace-draw))
 
+(defun fireplace--play-sound ()
+  "Play fireplace sound in a loop."
+  (if (executable-find "ffplay")
+      (progn (setq fireplace--sound-process
+                   (start-process "fireplace-sound" nil
+                                  "ffplay" "-nodisp" "-nostats" "-hide_banner" "-loop" "0"
+                                  fireplace-sound-file-path))
+             ;; Kill sound process before kill-buffer
+             (setq-local kill-buffer-query-functions '(fireplace--stop-sound)))
+    (message "Executable not found: \"ffplay\"")))
+
+(defun fireplace--stop-sound ()
+  "Stop fireplace sound."
+  ;; There is no process if executable not found.
+  ;; Should always return non-nil to not prevent kill-buffer. See `kill-buffer-query-functions'
+  (if (process-live-p fireplace--sound-process)
+      (kill-process fireplace--sound-process) t))
+
 ;; Commands
 
 ;;;###autoload
@@ -214,6 +243,7 @@
     (fireplace-mode)
     (add-hook 'window-size-change-functions 'fireplace--update-locals-vars nil t)
     (fireplace--disable-minor-modes)
+    (when fireplace-sound-on (fireplace--play-sound))
     (run-with-timer 1 (- 1 fireplace-fury) 'fireplace-draw fireplace-buffer-name)))
 
 (defun fireplace-off ()
@@ -238,6 +268,12 @@
   (interactive)
   (setq fireplace-smoke-on (not fireplace-smoke-on)))
 
+(defun fireplace-toggle-sound ()
+  "Toggle sound on/off."
+  (interactive)
+  (if fireplace-sound-on (fireplace--stop-sound) (fireplace--play-sound))
+  (setq fireplace-sound-on (not fireplace-sound-on)))
+
 ;;; Key-bindings
 
 (defvar fireplace-mode-map
@@ -245,6 +281,7 @@
     (define-key map (kbd "C-+") 'fireplace-up)
     (define-key map (kbd "C--") 'fireplace-down)
     (define-key map (kbd "C-*") 'fireplace-toggle-smoke)
+    (define-key map (kbd "C-=") 'fireplace-toggle-sound)
     (define-key map (kbd "q") 'fireplace-off)
     (define-key map (kbd "Q") 'fireplace-off)
     map)
