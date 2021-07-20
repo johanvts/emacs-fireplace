@@ -195,13 +195,17 @@
 (defun fireplace--disable-minor-modes ()
   "Disable minor modes that might affect rendering."
   (switch-to-buffer fireplace-buffer-name)
-  (setq truncate-lines t
-        cursor-type nil
-        show-trailing-whitespace nil
-        indicate-empty-lines nil)
-  (transient-mark-mode nil)
-  (buffer-disable-undo))
-
+  ;; Use local variables to avoid messing with the actual editing enviornment
+  (setq-local truncate-lines t
+              cursor-type nil
+              show-trailing-whitespace nil
+              indicate-empty-lines nil
+              transient-mark-mode nil
+              )
+  ;; Reference the fireplace buffer in-case the current buffer
+  ;; isn't the fireplace, for some reason.
+  (buffer-disable-undo fireplace-buffer-name)
+  )
 (defun fireplace--update-locals-vars (&optional stub-window)
   "Update `fireplace' local variables."
   (setq fireplace--bkgd-height (- (floor (window-height (get-buffer-window fireplace-buffer-name))) 1)
