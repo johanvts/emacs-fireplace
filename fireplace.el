@@ -201,6 +201,13 @@
               show-trailing-whitespace nil
               indicate-empty-lines nil
               transient-mark-mode nil
+              hl-line-mode nil
+              ;; global-hl-line mode overrides the local hl-line-mode
+              ;; *for some reason* and it's still called global-hl-line-mode
+              ;; *even though* you can set 'global-hl-line-mode' as a buffer-local.
+              global-hl-line-mode nil
+              ;; non-standard emacs packages
+              beacon-mode nil
               )
   ;; Reference the fireplace buffer in-case the current buffer
   ;; isn't the fireplace, for some reason.
