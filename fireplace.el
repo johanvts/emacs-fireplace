@@ -195,14 +195,25 @@
 (defun fireplace--disable-minor-modes ()
   "Disable minor modes that might affect rendering."
   (switch-to-buffer fireplace-buffer-name)
-  (setq truncate-lines t
-        cursor-type nil
-        show-trailing-whitespace nil
-        indicate-empty-lines nil)
-  (transient-mark-mode nil)
-  (buffer-disable-undo))
-
-(defun fireplace--update-locals-vars ()
+  ;; Use local variables to avoid messing with the actual editing enviornment
+  (setq-local truncate-lines t
+              cursor-type nil
+              show-trailing-whitespace nil
+              indicate-empty-lines nil
+              transient-mark-mode nil
+              hl-line-mode nil
+              ;; global-hl-line mode overrides the local hl-line-mode
+              ;; *for some reason* and it's still called global-hl-line-mode
+              ;; *even though* you can set 'global-hl-line-mode' as a buffer-local.
+              global-hl-line-mode nil
+              ;; non-standard emacs packages
+              beacon-mode nil
+              )
+  ;; Reference the fireplace buffer in-case the current buffer
+  ;; isn't the fireplace, for some reason.
+  (buffer-disable-undo fireplace-buffer-name)
+  )
+(defun fireplace--update-locals-vars (&optional stub-window)
   "Update `fireplace' local variables."
   (setq fireplace--bkgd-height (- (floor (window-height (get-buffer-window fireplace-buffer-name))) 1)
         fireplace--bkgd-width  (- (round (window-width (get-buffer-window fireplace-buffer-name))) 1)
